@@ -8,7 +8,7 @@ description: |
   不適用：同一 session 內由 Claude 協調外部 CLI 實作＋多模型 review（那是 ai-pair）。
 argument-hint: "save | resume | delegate <slug> [--to <agent>] [--run [--model M]] | report <task-id> | review <task-id>"
 metadata:
-  version: 0.5.0
+  version: 0.6.0
 ---
 
 # multiagent-handoff
@@ -27,6 +27,7 @@ metadata:
 - 換手前**不需要 commit**——同一台機器、同一個資料夾，未提交修改下一手看得到。
 - ❌ 不要在交接檔裡複述專案規則（`AGENTS.md` 已涵蓋），只寫這個任務特有的事。
 - ❌ 不要把檔案內容貼進交接檔，寫 `檔案:行號` 即可。
+- **長期記憶**在 `~/.agents/memory/`（個人層 `global/`、跨專案層 `shared/`、專案層 `projects/<專案>/`），**只有 Claude Code 寫入**。其他 agent 學到值得長期記住的事，寫進交接檔或任務單的「建議記憶」，由 Claude 在 resume／review 時決定是否寫入。
 
 ---
 
@@ -45,6 +46,7 @@ metadata:
    ## 已決定的事與原因（避免下一手推翻）
    ## 已知問題／試過但失敗的做法
    ## 驗證方式（跑什麼指令算通過）
+   ## 建議記憶（選填；格式：- [層：project/shared/global] 內容（原因：…））
    ```
 3. `python3 $H log "<你的工具> → <下一手或「待定」>｜<一句話進度>"`
 4. 告訴使用者交接檔已寫好，下一手開工時說「multiagent-handoff resume」即可。
@@ -62,6 +64,7 @@ metadata:
    - `python3 $H sessions`：列出本專案最近的 Claude Code / Codex / agy 對話，取最後幾則使用者訊息與 agent 回覆，推回任務目標與進度（agy 只有使用者訊息）。
    - 再用 `git diff HEAD` 看實際改了什麼。
 5. 先向使用者**摘要**（任務、已完成、下一步、疑點），**取得確認後才開工**。
+   - 你是 **Claude Code** 且交接檔有「建議記憶」→ 依下方〈處理建議記憶〉一併提出。
 6. 開工後在 log 追加一行：`python3 $H log "<上一手> → <你>｜接手，從 <第一步> 開始"`。
 
 ## delegate — 主 agent 分派任務
@@ -115,6 +118,7 @@ metadata:
    - 修改內容：每檔一行。
    - 驗證方式與結果：貼**實際執行**的指令與輸出摘要。沒跑就寫沒跑，不要寫「應該可以」。
    - 未處理事項／疑問。
+   - **建議記憶**（選填）：這次學到、之後還會遇到的決定或坑。❌ 不要直接改 `~/.agents/memory/`。
 3. 把任務單的「狀態」改為 `已回報`。
 4. `python3 $H log "<你> → 主 agent｜<task-id> 已回報"`。
 
@@ -126,9 +130,18 @@ metadata:
    - [ ] 回報列的修改與實際 diff 一致嗎？（有改沒報、有報沒改都要列出）
    - [ ] **自己重跑**「完成標準」的驗證指令，不採信回報的結果。
    - [ ] 是否違反「禁止事項」或專案硬規則？（逐檔 `git diff refs/handoff/<task-id> -- <檔案>`）
-3. 填「驗收結果」，狀態改為 `已驗收` 或 `退回`（退回時寫明原因，對方用 report 再做一次）。
-4. `python3 $H log "主 agent｜<task-id> 已驗收／退回：<原因>"`。
-5. 驗收通過且不再需要基準時，可刪除 ref：`git update-ref -d refs/handoff/<task-id>`。
+3. 你是 **Claude Code** → 依下方〈處理建議記憶〉處理回報的「建議記憶」，以及「已決定的事」「試過但失敗的做法」裡值得長期記住的內容。
+4. 填「驗收結果」，狀態改為 `已驗收` 或 `退回`（退回時寫明原因，對方用 report 再做一次）。
+5. `python3 $H log "主 agent｜<task-id> 已驗收／退回：<原因>"`。
+6. 驗收通過且不再需要基準時，可刪除 ref：`git update-ref -d refs/handoff/<task-id>`。
+
+## 處理建議記憶（只有 Claude Code 執行）
+
+1. 逐條判斷：只跟這次任務有關 → 丟棄；之後還會遇到 → 保留。
+2. 判斷層級：「**換到另一個專案還成立嗎？**」不成立 → 專案層；成立但限特定技術或公司 → `shared/`；永遠成立 → `global/`。
+3. 先查該層 `MEMORY.md` 有沒有同一件事，有就更新原檔，不重複開新檔。
+4. **把要寫入的內容給使用者看過、同意後**才寫入（格式與寫入規則見全域 `~/.claude/CLAUDE.md`「長期記憶」）。
+5. 不存密碼、token、secret、帳號 ID；不存任務進度。
 
 ---
 

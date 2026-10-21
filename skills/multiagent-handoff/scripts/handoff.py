@@ -154,6 +154,7 @@ TASK_TEMPLATE = """# 任務：{title}
 ### 修改內容（每檔一行）
 ### 驗證方式與結果（貼實際指令與輸出摘要）
 ### 未處理事項／疑問
+### 建議記憶（選填；值得長期記住的決定、踩過的坑。格式：- [層：project/shared/global] 內容（原因：…））
 
 ---
 ## 驗收結果（由主 agent 填寫）
@@ -313,7 +314,8 @@ def cmd_run(a):
     skill_md = os.path.join(SKILL_DIR, 'SKILL.md')
     prompt = (f'讀 {skill_md}，你是被分派的 agent（{spec["name"]}），執行其中的 report 流程，'
               f'任務單是 {os.path.relpath(path, ROOT)}。只改任務單允許的檔案；'
-              f'需要動範圍外的檔案就停下來寫進「未處理事項／疑問」。')
+              f'需要動範圍外的檔案就停下來寫進「未處理事項／疑問」；'
+              f'學到值得長期記住的事寫進「建議記憶」，不要直接改 ~/.agents/memory/。')
     cmd = spec['cmd'](a.model, a.timeout) + [prompt]
     log_path = path[:-3] + '.run.log'
 

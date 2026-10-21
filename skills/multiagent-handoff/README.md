@@ -2,6 +2,7 @@
 
 在多個 AI agent（Claude Code、Codex CLI、Copilot CLI、opencode、agy、Cursor CLI）之間**接力同一個專案**：換手接續、分派任務、事後驗收。
 
+> **v0.6.0**（2026-10-21）加「建議記憶」：save 的交接檔與 report 的任務單多一節，其他 agent 不直接寫長期記憶（`~/.agents/memory/`），由 Claude 在 resume／review 時判斷層級、給使用者看過後寫入。
 > **v0.5.0**（2026-10-21）由 `handoff` 改名為 `multiagent-handoff`（避免與 Matt Pocock 的 `/handoff` 撞名；`.handoff/`、`refs/handoff/`、`handoff.py` 沿用）。
 > **v0.4.0**（2026-10-19）全域安裝：本體在 `~/.agents/skills/multiagent-handoff/`，六個工具共用同一份。
 > 規劃與設計理由見 b2b-manager `docs/agent-handoff/agent-handoff-規劃.md`。
