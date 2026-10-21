@@ -1,0 +1,8 @@
+.DS_Store
+*.backup-*
+*.bak-*
+__pycache__/
+*.pyc
+# Basic Memory 索引（之後加入）
+*.db
+*.sqlite*
