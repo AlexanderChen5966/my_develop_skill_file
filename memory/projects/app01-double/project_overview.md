@@ -1,9 +1,11 @@
 ---
 name: project-overview
-description: app01-double 是 Flutter 加油站 APP（sanlong）：Riverpod、單一大型控制器 SLController、自訂 SLRouter；含重要檔案路徑
+description: app01-double 是 Flutter 加油站 APP（sanlong）：Riverpod、單一大型控制器 SLController、自訂
+  SLRouter；含重要檔案路徑
 metadata:
   type: project
-  modified: 2026-10-21T07:50:00.000Z
+  modified: 2026-10-21 07:50:00+00:00
+permalink: agents-memory/projects/app01-double/project-overview
 ---
 
 - Flutter 加油站 APP（sanlong），版本 2.12.1+688（記錄當時；以 `pubspec.yaml` 為準）

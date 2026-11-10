@@ -1,11 +1,13 @@
 ---
 name: project_dockerize_dind_mtu
-description: dockerize job 在 GitLab SaaS runner 的 dind 內 apt-get 逾時＝MTU 不一致；已用 docker build --network host 繞過
+description: dockerize job 在 GitLab SaaS runner 的 dind 內 apt-get 逾時＝MTU 不一致；已用 docker
+  build --network host 繞過
 metadata:
   node_type: memory
   type: project
   originSessionId: f838ebc2-fd28-4c3d-9a04-dedaa83be7cf
-  modified: 2026-10-14T00:59:19.373Z
+  modified: 2026-10-14 00:59:19.373000+00:00
+permalink: agents-memory/shared/project-dockerize-dind-mtu
 ---
 
 2026-10-13 打 tag `stage-3.6.6` 時 dockerize job 連兩次失敗：Dockerfile `apt-get update` 對 deb.debian.org 出現 `Get:… [140 kB]` 後 30 秒 `Connection timed out`。同設定的 stage-3.6.5（2026-09-23）是成功的。

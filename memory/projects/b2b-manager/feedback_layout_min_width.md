@@ -3,7 +3,9 @@ name: 雙面板 fill-viewport 佈局標準模式
 description: 左右雙面板頁面的最終佈局策略：LayoutBuilder 取可用寬 + 固定最小面板像素 + 水平捲軸
 type: feedback
 originSessionId: 700e0458-acba-46a7-8b6b-2c0bd48a9f79
+permalink: agents-memory/projects/b2b-manager/feedback-layout-min-width
 ---
+
 ## 標準模式（已驗證，batch_edit_car_page.dart 採用）
 
 參考 Dashboard 頁面做法。用 `LayoutBuilder` 取得 `CustomAnimatedContainer` 給予的實際可用寬度（已自動扣除側邊欄），再計算固定面板像素。

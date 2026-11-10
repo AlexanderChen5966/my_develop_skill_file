@@ -5,7 +5,8 @@ metadata:
   node_type: memory
   type: reference
   originSessionId: 9db4508e-8758-4678-b28a-e19d02948c32
-  modified: 2026-10-01T09:28:28.939Z
+  modified: 2026-10-01 09:28:28.939000+00:00
+permalink: agents-memory/projects/b2b-manager/reference-artifact-style-ssgs3444
 ---
 
 使用者指定的流程展示 Artifact 參考檔：`docs/assets/SSGS-3444 測試報告.html`（2026-09-30 由另一個 session 產出，約 850KB，大部分是 base64 截圖；讀之前先用 sed 把 `data:image/...;base64,...` 換掉）。

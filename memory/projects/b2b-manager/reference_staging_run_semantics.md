@@ -1,11 +1,12 @@
 ---
 name: reference-staging-run-semantics
 description: flutter run --dart-define=DEPLOY=staging 跑的是本機工作區前端＋staging 後端，不可推論已部署環境
-metadata: 
+metadata:
   node_type: memory
   type: reference
   originSessionId: f0a7cac0-141a-4605-b748-859ebfc4ffe4
-  modified: 2026-09-07T07:08:43.316Z
+  modified: 2026-09-07 07:08:43.316000+00:00
+permalink: agents-memory/projects/b2b-manager/reference-staging-run-semantics
 ---
 
 `flutter run -d chrome -t lib/main_dev.dart --dart-define=DEPLOY=staging --web-port=9001`

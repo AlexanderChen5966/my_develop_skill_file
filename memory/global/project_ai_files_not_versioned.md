@@ -1,8 +1,10 @@
 ---
 name: project-ai-files-not-versioned
-description: 所有 AI 相關檔案（AGENTS.md／CLAUDE.md／GEMINI.md／.claude/／docs/）刻意不上版控，屬個人使用；未經公司允許前不可提議納入 git
+description: 所有 AI 相關檔案（AGENTS.md／CLAUDE.md／GEMINI.md／.claude/／docs/）刻意不上版控，屬個人使用；未經公司允許前不可提議納入
+  git
 metadata:
   type: project
+permalink: agents-memory/global/project-ai-files-not-versioned
 ---
 
 b2b-manager 的 AI 相關檔案**全部刻意排除在版控之外**，`.gitignore` 明列：

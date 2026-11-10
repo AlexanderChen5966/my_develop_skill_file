@@ -1,10 +1,11 @@
 ---
 name: feedback-aipair-developer
 description: ai-pair copilot-developer 適用場景與直接實作的取捨判斷
-metadata: 
+metadata:
   node_type: memory
   type: feedback
   originSessionId: bf7caf03-b8c8-4e99-b2fc-53d67e3e69cf
+permalink: agents-memory/global/feedback-aipair-developer
 ---
 
 對於「同一 pattern 重複套用」的任務（如全站表格排序），Team Lead 直接用 Read/Edit 工具實作比走 copilot-developer 更快、更精確。

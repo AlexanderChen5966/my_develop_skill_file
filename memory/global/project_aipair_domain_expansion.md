@@ -1,10 +1,11 @@
 ---
 name: project-aipair-domain-expansion
 description: AI-Pair v4.2 跨領域遷移可行性分析結論 — 哪些領域可用、遷移條件與最小改動範圍
-metadata: 
+metadata:
   node_type: memory
   type: project
   originSessionId: 50f99cbc-7da6-470f-9051-588812358665
+permalink: agents-memory/global/project-aipair-domain-expansion
 ---
 
 # AI-Pair v4.2 跨領域遷移可行性結論

@@ -5,7 +5,8 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 75d45ce5-bffb-4ff8-845f-30f7f00eccad
-  modified: 2026-09-23T02:22:38.440Z
+  modified: 2026-09-23 02:22:38.440000+00:00
+permalink: agents-memory/projects/b2b-manager/project-car-data-volume
 ---
 
 正式區單一企業車輛數目前最多約 **3 萬台**；staging「高雄市私立同安汽車駕駛人訓練班」的 29 萬台是測試資料（2026-09-23 使用者說明）。

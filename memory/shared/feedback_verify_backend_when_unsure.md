@@ -5,7 +5,8 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: 4d2349fd-c923-4e3b-975f-c6c21333640e
-  modified: 2026-10-07T03:33:35.826Z
+  modified: 2026-10-07 03:33:35.826000+00:00
+permalink: agents-memory/shared/feedback-verify-backend-when-unsure
 ---
 
 不確定後端行為時，直接去 `/Users/alexander/GitLab/b2b-backend` 讀原始碼確認（controller 的 `@PreAuthorize`／`@ValidGroupId`、service 的 throw、enum 定義），不要留「信心：需實測」或「依 commit 註解得知」就交差。

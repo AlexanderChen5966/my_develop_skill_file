@@ -1,11 +1,12 @@
 ---
 name: feedback-subagent-delegation
 description: b2b-manager 不採用自動 subagent 分工，維持主 session 直接實作
-metadata: 
+metadata:
   node_type: memory
   type: feedback
   originSessionId: 083a402c-9474-4b39-ab8c-f8aeedfcf22e
-  modified: 2026-08-14T05:42:40.954Z
+  modified: 2026-08-14 05:42:40.954000+00:00
+permalink: agents-memory/projects/b2b-manager/feedback-subagent-delegation
 ---
 
 2026-08-14 討論「Opus 當管理者指揮其他 model 的 subagent」後結論：**不導入自動分工**，維持主 session 直接實作為預設。

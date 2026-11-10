@@ -1,11 +1,13 @@
 ---
 name: project-docs-concurrent-write-hazard
-description: docs/ 在 .gitignore 內，並行編輯或整批複製失敗都會不可復原地遺失內容；約定單一寫入者，文字檔可從 session transcript 的 Write 呼叫原封還原
-metadata: 
+description: docs/ 在 .gitignore 內，並行編輯或整批複製失敗都會不可復原地遺失內容；約定單一寫入者，文字檔可從 session transcript
+  的 Write 呼叫原封還原
+metadata:
   node_type: memory
   type: project
   originSessionId: bf60a89d-a3d1-41ff-9c41-8bae9940d841
-  modified: 2026-09-09T08:28:28.921Z
+  modified: 2026-09-09 08:28:28.921000+00:00
+permalink: agents-memory/global/project-docs-concurrent-write-hazard
 ---
 
 使用者常同時開多個 Claude session 在 b2b-manager 上工作（session 之間用 cross-session message 協調）。`/docs/` 在 `.gitignore` 第 80 行，因此 `docs/` 底下的改動 **`git status` 偵測不到、被覆蓋也無法用 git 復原**。

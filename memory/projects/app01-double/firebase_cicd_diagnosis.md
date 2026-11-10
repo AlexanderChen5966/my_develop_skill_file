@@ -1,10 +1,12 @@
 ---
 name: firebase-cicd-diagnosis
-description: Firebase App Distribution CI 失敗：表面是 --token 認證被棄用，根本原因是 Mac runner 上傳速率異常導致 timeout（2026-04-17 診斷，修好與否未確認）
+description: Firebase App Distribution CI 失敗：表面是 --token 認證被棄用，根本原因是 Mac runner 上傳速率異常導致
+  timeout（2026-04-17 診斷，修好與否未確認）
 metadata:
   type: project
   originSessionId: 2cdded01-42b9-4a32-96c4-baa906dca49e
-  modified: 2026-10-21T07:45:00.000Z
+  modified: 2026-10-21 07:45:00+00:00
+permalink: agents-memory/projects/app01-double/firebase-cicd-diagnosis
 ---
 
 **最後診斷日期**：2026-04-17（Mac runner 本機驗證）。之後是否已修好**未確認**，再遇到時先問使用者現況。

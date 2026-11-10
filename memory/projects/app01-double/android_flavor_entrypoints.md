@@ -1,11 +1,12 @@
 ---
 name: android-flavor-entrypoints
 description: Android 各 flavor 有獨立進入點，flutter build 必須帶 --target 否則失敗
-metadata: 
+metadata:
   node_type: memory
   type: project
   originSessionId: 8667a7bb-a333-4ca6-ab4c-86dcc7833098
-  modified: 2026-07-22T01:56:17.392Z
+  modified: 2026-07-22 01:56:17.392000+00:00
+permalink: agents-memory/projects/app01-double/android-flavor-entrypoints
 ---
 
 Android 各 flavor 有**獨立的 Dart 進入點**，`lib/main.dart` 只有 `mainCommon()` 沒有 `main()`。只下 `--flavor` 而不帶 `--target` 會失敗，報 `main.dart: No 'main' method found`。

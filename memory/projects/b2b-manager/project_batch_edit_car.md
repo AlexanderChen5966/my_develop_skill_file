@@ -1,10 +1,11 @@
 ---
 name: project-batch-edit-car
 description: 批次車輛編輯功能已全部完成（2026-05 歸檔），僅剩 10 分鐘復原機制待實作
-metadata: 
+metadata:
   node_type: memory
   type: project
   originSessionId: 34ad0a2f-2129-4b0a-99a5-73d107dc3df1
+permalink: agents-memory/projects/b2b-manager/project-batch-edit-car
 ---
 
 批次車輛編輯功能已於 2026-05 全部完成並歸檔。

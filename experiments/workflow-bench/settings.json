@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "allow": [
+      "Read", "Edit", "Write", "Glob", "Grep", "Skill", "Agent", "Task", "TodoWrite", "ToolSearch",
+      "Bash(flutter analyze:*)", "Bash(flutter test:*)", "Bash(flutter pub get:*)", "Bash(dart format:*)", "Bash(dart analyze:*)",
+      "Bash(dart run build_runner:*)", "Bash(flutter pub run build_runner:*)",
+      "Bash(git status:*)", "Bash(git diff:*)", "Bash(git log:*)", "Bash(git show:*)", "Bash(git fetch:*)",
+      "Bash(git branch:*)", "Bash(git rev-parse:*)", "Bash(git grep:*)", "Bash(git blame:*)", "Bash(git merge-base:*)", "Bash(git ls-files:*)",
+      "Bash(ls:*)", "Bash(cat:*)", "Bash(head:*)", "Bash(tail:*)", "Bash(wc:*)", "Bash(grep:*)", "Bash(rg:*)", "Bash(find:*)",
+      "Bash(sed -n:*)", "Bash(awk:*)", "Bash(sort:*)", "Bash(uniq:*)", "Bash(diff:*)", "Bash(date:*)", "Bash(pwd)", "Bash(echo:*)", "Bash(mkdir:*)"
+    ],
+    "deny": [
+      "Bash(git add:*)", "Bash(git commit:*)", "Bash(git push:*)", "Bash(git reset:*)", "Bash(git checkout:*)",
+      "Bash(rm:*)", "Bash(curl:*)", "Bash(wget:*)", "WebFetch", "WebSearch"
+    ]
+  },
+  "includeCoAuthoredBy": false
+}

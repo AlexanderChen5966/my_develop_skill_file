@@ -1,10 +1,11 @@
 ---
 name: ref-car-plate-validation
 description: 另一個專案的新增車輛車號阻擋邏輯（驗證順序與規則）
-metadata: 
+metadata:
   node_type: memory
   type: reference
   originSessionId: 1d997c83-282e-40de-a33a-6bc2798d0d4c
+permalink: agents-memory/projects/app01-double/ref-car-plate-validation
 ---
 
 ## 新增車輛 車號阻擋邏輯（另一個專案）

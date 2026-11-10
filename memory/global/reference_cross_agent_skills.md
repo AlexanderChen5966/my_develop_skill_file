@@ -5,12 +5,13 @@ metadata:
   node_type: memory
   type: reference
   originSessionId: 654b6d59-535e-4992-8457-183b1a62ade6
-  modified: 2026-10-19T08:54:30.454Z
+  modified: 2026-10-19 08:54:30.454000+00:00
+permalink: agents-memory/global/reference-cross-agent-skills
 ---
 
 跨工具共用的 skill 本體放 `~/.agents/skills/<name>/`（Codex／Copilot CLI／opencode／Cursor CLI 原生讀；
 Cursor 同時讀 `~/.claude/skills/`，同一實體會去重，實測 1 份），
-Claude Code 與 agy 用 `~/.agents/link-skills.sh`（link／check／unlink）建 symlink。2026-10-20 起共用 7 個（multiagent-handoff（2026-10-21 由 handoff 改名，避開 Matt Pocock 的 /handoff）、stack-review、requirements、doc-update、project-documentation、figma-to-requirements、cross-platform-archive-agent），六工具實測各 1 份。
+Claude Code 與 agy 用 `~/.agents/link-skills.sh`（link／check／unlink）建 symlink。2026-10-20 起共用 7 個（multiagent-handoff（2026-10-21 由 handoff 改名，避開 Matt Pocock 的 /handoff）、stack-review、requirements、doc-update、project-documentation、figma-to-requirements、cross-platform-archive-agent），六工具實測各 1 份。2026-11-09 再加 Matt Pocock 的 7 個（grilling、grill-me、diagnosing-bugs、tdd、pr、writing-for-agents、retro）與自己改寫的 doubt-check（共 15 個），來源與本機修改記在 `~/.agents/skills/MATTPOCOCK-SOURCE.md`；同名 skill 不可再放進 repo 的 `.claude/skills/`（專案版會蓋過共用版）。
 **只有 ai-pair 留在 `~/.claude/skills/`**（使用者指定；Claude 專屬）。ai-pair 有 disable-model-invocation，模型清單本來就看不到它，屬正常。
 
 **agy 路徑以實測為準**：官方網頁說 CLI 讀 `~/.gemini/antigravity-cli/skills/`，但 agy 1.4.2 實際只讀

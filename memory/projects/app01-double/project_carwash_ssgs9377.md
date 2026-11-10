@@ -1,9 +1,11 @@
 ---
 name: project-carwash-ssgs9377
-description: 預約洗車（SSGS-9377）已合併 main 但從未上架；保留的設計決定：訂單詳情用 pushMain、本地儲存登出不清除、設計圖 4-1/4-2 檔名對調
+description: 預約洗車（SSGS-9377）已合併 main 但從未上架；保留的設計決定：訂單詳情用 pushMain、本地儲存登出不清除、設計圖 4-1/4-2
+  檔名對調
 metadata:
   type: project
-  modified: 2026-10-21T07:50:00.000Z
+  modified: 2026-10-21 07:50:00+00:00
+permalink: agents-memory/projects/app01-double/project-carwash-ssgs9377
 ---
 
 SSGS-9377 預約洗車：規劃文件在 `docs/car_wash/`（17 個任務）。分支 `feature/SSGS-9377` 已合併進 main（2026-10-21 以 git 確認）。

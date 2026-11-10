@@ -1,11 +1,13 @@
 ---
 name: reference-figma-mcp-quota
-description: 讀公司 Figma 檔時以 Professional/View 席位計，每月僅 6 次讀取、不能寫入；用完改請使用者給 PNG；以 Figma → Flutter 為主
+description: 讀公司 Figma 檔時以 Professional/View 席位計，每月僅 6 次讀取、不能寫入；用完改請使用者給 PNG；以 Figma
+  → Flutter 為主
 metadata:
   node_type: memory
   type: reference
   originSessionId: 9db4508e-8758-4678-b28a-e19d02948c32
-  modified: 2026-10-21T07:45:00.000Z
+  modified: 2026-10-21 07:45:00+00:00
+permalink: agents-memory/shared/reference-figma-mcp-quota
 ---
 
 Figma MCP（`plugin:figma:figma`）登入的是使用者的**個人帳號**（自己的 team 是 Starter/View；帳號信箱不記在記憶裡，用 `whoami` 查）。

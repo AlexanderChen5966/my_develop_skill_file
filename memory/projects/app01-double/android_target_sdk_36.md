@@ -1,11 +1,12 @@
 ---
 name: android-target-sdk-36
 description: 已升級 Android targetSdk/compileSdk 到 36 (Android 16) 因應 Google Play 政策
-metadata: 
+metadata:
   node_type: memory
   type: project
   originSessionId: 8667a7bb-a333-4ca6-ab4c-86dcc7833098
-  modified: 2026-07-22T01:56:24.324Z
+  modified: 2026-07-22 01:56:24.324000+00:00
+permalink: agents-memory/projects/app01-double/android-target-sdk-36
 ---
 
 因應 Google Play 政策（2026-08-31 起應用更新須 target Android 16 / API 36），已於 2026-07-22 升級。

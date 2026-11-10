@@ -1,11 +1,13 @@
 ---
 name: project-oauth-client-secret-rotation
-description: auth server 換 client secret 時要跟進的是 b2b-backend／03ManageCenter 的 AWS ECS 環境變數，前端（PKCE public client）不持有 secret；前端全站 API 失敗先懷疑 introspect secret 沒同步
+description: auth server 換 client secret 時要跟進的是 b2b-backend／03ManageCenter 的 AWS ECS
+  環境變數，前端（PKCE public client）不持有 secret；前端全站 API 失敗先懷疑 introspect secret 沒同步
 metadata:
   node_type: memory
   type: project
   originSessionId: 77cf892e-47e7-475d-99b4-3572b5d3d5b3
-  modified: 2026-10-21T07:45:00.000Z
+  modified: 2026-10-21 07:45:00+00:00
+permalink: agents-memory/shared/project-oauth-client-secret-rotation
 ---
 
 2026-10-21 auth server 更新 OAuth client secret 時的盤點結論（已結案；完整紀錄在 b2b-manager `docs/issue/oauth_client_secret_rotation_2026-10-21.md`）：

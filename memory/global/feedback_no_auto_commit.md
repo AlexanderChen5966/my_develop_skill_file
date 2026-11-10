@@ -1,10 +1,11 @@
 ---
 name: feedback-no-auto-commit
 description: ai-pair 和所有 agent 任務中禁止自動 git commit，由使用者人工處理
-metadata: 
+metadata:
   node_type: memory
   type: feedback
   originSessionId: 6c55bfa6-d58c-40af-a765-ef1e708aacd6
+permalink: agents-memory/global/feedback-no-auto-commit
 ---
 
 不要在 ai-pair 或任何 agent 任務中執行 git commit。

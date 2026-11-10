@@ -1,11 +1,12 @@
 ---
 name: release-line-vs-tag-mismatch
 description: git tag 命名與實際上架線嚴重錯位；洗車服務(SSGS-9377)雖在 main 上但從未上架
-metadata: 
+metadata:
   node_type: memory
   type: project
   originSessionId: c82ffa25-5e9b-4819-8968-5731d8621df2
-  modified: 2026-08-21T03:25:01.691Z
+  modified: 2026-08-21 03:25:01.691000+00:00
+permalink: agents-memory/projects/app01-double/release-line-vs-tag-mismatch
 ---
 
 2026-08-21 為出版 2.24.2 追查得出。**不要用 tag 名稱推斷版本先後或內容。**

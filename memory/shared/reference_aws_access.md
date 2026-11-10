@@ -1,11 +1,13 @@
 ---
 name: reference-aws-access
-description: 公司 AWS 走 Entra ID SAML 直連 IAM Role（非 Identity Center，aws configure sso 不適用）；帳號 ID、角色名稱不記在這裡，到 AWS Console 右上角或問 IT 查
+description: 公司 AWS 走 Entra ID SAML 直連 IAM Role（非 Identity Center，aws configure sso
+  不適用）；帳號 ID、角色名稱不記在這裡，到 AWS Console 右上角或問 IT 查
 metadata:
   node_type: memory
   type: reference
   originSessionId: 9b0616e8-b6ef-4622-b036-5287d625c666
-  modified: 2026-10-21T07:45:00.000Z
+  modified: 2026-10-21 07:45:00+00:00
+permalink: agents-memory/shared/reference-aws-access
 ---
 
 - 登入路徑：Microsoft MyApps（myapps.microsoft.com）→ 點公司的 AWS SSO 圖示 → 直接進 AWS Console（沒有 awsapps.com 入口）

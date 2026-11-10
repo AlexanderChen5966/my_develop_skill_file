@@ -1,11 +1,14 @@
 ---
 name: project-dashboard-switch-company-remount-regression
-description: dashboard 首頁卡片「只在 initState 打 API」靠 unmount/remount 刷新的隱性依賴；P2 拿掉 remount 後切公司五張卡片卡舊，2026-09-09 以 ref.listen(selectCompany.id)+X_Group_Id 去重修好；context.replace 對 const route 不重建；select(groups) 同 List 實例不觸發
-metadata: 
+description: dashboard 首頁卡片「只在 initState 打 API」靠 unmount/remount 刷新的隱性依賴；P2 拿掉 remount
+  後切公司五張卡片卡舊，2026-09-09 以 ref.listen(selectCompany.id)+X_Group_Id 去重修好；context.replace
+  對 const route 不重建；select(groups) 同 List 實例不觸發
+metadata:
   node_type: memory
   type: project
   originSessionId: 590929a8-ea86-44be-a222-c0c091506190
-  modified: 2026-09-09T08:23:36.705Z
+  modified: 2026-09-09 08:23:36.705000+00:00
+permalink: agents-memory/projects/b2b-manager/project-dashboard-switch-company-remount-regression
 ---
 
 `dashboard_loading_optimization_2026-09-01.md` 第一批 P2 把 `home_board_page.dart` 兩層 loading gate 從「整棵子樹換成 SlLoading（卡片 unmount/remount）」改成「Stack 疊覆蓋層」，2026-09-09 staging 實機量測證實這移除了五張卡片唯一的資料刷新機制（切公司後卡片 API 0 次、畫面全是舊公司資料）。同日以方案 ① 修好並實測通過（切公司後各卡片 API 恰 1 次、資料正確），尚未 commit。

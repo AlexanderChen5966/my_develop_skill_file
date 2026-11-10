@@ -1,10 +1,11 @@
 ---
 name: feedback-copilot-reviewer
 description: copilot-reviewer（GPT）無法讀取 stdin diff，回報虛構檔案路徑
-metadata: 
+metadata:
   node_type: memory
   type: feedback
   originSessionId: bf7caf03-b8c8-4e99-b2fc-53d67e3e69cf
+permalink: agents-memory/global/feedback-copilot-reviewer
 ---
 
 copilot-reviewer 透過 `cat file | copilot --model gpt-4.1 -p "..."` 方式執行時，GPT 未能實際讀取 diff 內容，回報了不存在於專案中的檔案路徑（如 `lib/widget/table/user_table.dart`），結果完全不可採信。

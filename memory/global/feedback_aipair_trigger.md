@@ -1,10 +1,11 @@
 ---
 name: feedback_aipair_trigger
 description: 只有產生過需求文件的任務才會用 ai-pair 執行；小改動直接手動
-metadata: 
+metadata:
   node_type: memory
   type: feedback
   originSessionId: b5f6d874-0cd8-4a4b-a4d1-48e9bc4eff24
+permalink: agents-memory/global/feedback-aipair-trigger
 ---
 
 只有**已有需求文件（docs/shared/*.md）的任務**才啟動 ai-pair 流程執行。

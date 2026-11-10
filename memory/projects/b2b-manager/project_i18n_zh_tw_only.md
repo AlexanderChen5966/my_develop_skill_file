@@ -1,11 +1,12 @@
 ---
 name: project-i18n-zh-tw-only
 description: 本專案 i18n 實際只有繁體中文生效，en/zh_CN 的 arb 不需翻譯
-metadata: 
+metadata:
   node_type: memory
   type: project
   originSessionId: d4d587cf-ef0c-4be9-826d-379ba38613cb
-  modified: 2026-08-26T09:30:00.000Z
+  modified: 2026-08-26 09:30:00+00:00
+permalink: agents-memory/projects/b2b-manager/project-i18n-zh-tw-only
 ---
 
 寫新 i18n key 時**只需要繁體中文**，`intl_en.arb` / `intl_zh_CN.arb` 的值一律填**同一句繁中**（三份 arb 都要有 key，產生器需要 key 齊全，但那兩份的內容永遠不會被顯示）。

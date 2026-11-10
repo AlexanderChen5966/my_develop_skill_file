@@ -3,7 +3,9 @@ name: feedback-no-screenutil
 description: 全專案新增或修改的程式碼禁止使用 screenutil，改用固定像素值；規則已寫入 CLAUDE.md
 type: feedback
 originSessionId: 700e0458-acba-46a7-8b6b-2c0bd48a9f79
+permalink: agents-memory/projects/b2b-manager/feedback-no-screenutil
 ---
+
 全專案新增或修改的程式碼禁止使用 `flutter_screenutil`（不加 `.w`、`.h`、`.sp`）。
 
 **Why:** 近期最大功能（批次編輯車輛，SSGS-7469）完全採用固定 px，方向已明確；規則於 2026-04-24 正式寫入 CLAUDE.md Section 6。

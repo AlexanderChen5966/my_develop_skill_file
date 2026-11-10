@@ -3,6 +3,7 @@ name: feedback-agents-md-self-sufficient
 description: AGENTS.md 必須自給自足，不可為省 context 把規則移進 .claude/rules/
 metadata:
   type: feedback
+permalink: agents-memory/global/feedback-agents-md-self-sufficient
 ---
 
 `AGENTS.md` 是給**其他平台 agent** 讀的（Codex、Antigravity、OpenCode、Gemini CLI、Copilot），

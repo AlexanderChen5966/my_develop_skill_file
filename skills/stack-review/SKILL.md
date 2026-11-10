@@ -2,8 +2,8 @@
 name: stack-review
 description: Comprehensive code review for multiple tech stacks with automatic technology detection. Supports Flutter (Riverpod/Bloc), Java Spring Boot, and Android (Java/Kotlin). Use when the user requests code review (e.g., "/review", "review this code", "check my changes"), after completing feature development, or for pre-commit checks. Automatically detects project type and applies appropriate architectural standards, security checks, and best practices.
 metadata:
-  version: 1.1.0
-  last-updated: 2026-01-08
+  version: 1.6.0
+  last-updated: 2026-11-09
 ---
 
 # Code Review
@@ -197,9 +197,52 @@ Context: Spring Boot 3.x, JPA/Hibernate, RESTful architecture
 Checklists: references/common.md, references/springboot.md
 ```
 
+### Step 4b: Spec Review (parallel, when a task document exists)
+
+The checklist review above answers "is the code written well?". It cannot answer "is this the code
+the task asked for?" — code can pass every checklist and still implement the wrong thing, skip a
+requirement, or add unrequested behaviour. A second subagent checks the diff against the task
+document.
+
+**Find the spec** (stop at the first hit):
+
+1. A path the user passed
+2. `docs/shared/*.md` whose `**分支編號：**` matches the Jira key in the branch name or commit messages (e.g. `SSGS-12345`)
+3. `docs/shared/*.md` with `**狀態：** 🔄 進行中` or `⏳ 待實作` whose `**影響路徑：**` overlaps the changed files
+4. Several candidates or none → ask the user. If they say there is no task document, skip this step and say so in the summary ("Spec: no task document, skipped")
+
+**Launch it in the same message as the Step 4 code-reviewer call**, so both run in parallel and
+neither pollutes the other's context:
+
+```
+Task(
+  subagent_type='general-purpose',
+  description='Spec review against task doc',
+  prompt='''
+    Compare a code change against its task document. Do not review code style or quality.
+
+    **Diff**: `git diff origin/<target>...HEAD` (commits: `git log --oneline origin/<target>..HEAD`)
+    **Task document**: docs/shared/<file>.md — read it in full, especially 需求說明, 契約依據, 實作任務 and the checklist in 執行步驟.
+
+    Report:
+    (a) Missing or partial: things the task document asks for that the diff does not do
+    (b) Scope creep: behaviour in the diff the task document did not ask for
+    (c) Implemented but looks wrong: matches a requirement in name, but the behaviour differs
+    (d) 後端依賴 / 跨服務契約: if the doc declares backend enums/DTOs, does the code handle them as the doc says?
+
+    Quote the task-document line for every finding, plus file:line in the diff.
+    If the task document itself is ambiguous on a point, say so instead of guessing.
+    Under 400 words.
+  '''
+)
+```
+
+> **Agents without a subagent/Task tool**: do the spec pass yourself *after* finishing the checklist
+> pass, and keep the two sets of notes separate.
+
 ### Step 5: Process Review Results
 
-After the code-reviewer subagent completes:
+After the code-reviewer subagent (and the spec subagent, if launched) completes:
 
 1. **Categorize Findings** by severity:
    - 🔴 **Critical**: Security, architecture violations, performance issues (N+1, memory leaks)
@@ -209,6 +252,10 @@ After the code-reviewer subagent completes:
 2. **Prioritize Issues**: Address critical first, group related issues, provide actionable fixes with code examples
 
 3. **Verify Against Checklists**: Cross-reference with stack-specific and common checklists
+
+4. **Keep spec findings separate**: do not merge them into the 🔴/🟡/🟢 lists or rerank them against
+   checklist findings. A change can pass one axis and fail the other; merging lets one mask the other.
+   Present them under their own heading (see Step 6).
 
 ### Step 6: Present Review Summary
 
@@ -230,6 +277,13 @@ After the code-reviewer subagent completes:
 
 ### Suggestions (🟢)
 [List optional improvements]
+
+### Spec Check (vs `docs/shared/<file>.md`)
+<!-- or: "Spec: no task document, skipped" -->
+- **Missing / partial**: [requirement quote] → [file:line or "not found"]
+- **Scope creep**: [file:line] — [what it does that wasn't asked]
+- **Looks wrong**: [requirement quote] vs [file:line]
+- **Contract**: [backend dependency handled as documented? yes / issue]
 
 ### Compliance Checklist
 - [x] Architecture pattern correct
@@ -319,6 +373,20 @@ User: "Review all my changes"
 4. Generate two review reports
 ```
 
+## Common Excuses（常見藉口）
+
+Before skipping a step, check this table:
+
+| Excuse | Why it doesn't hold |
+|---|---|
+| 「本地 main 應該是新的，不用 fetch」 | 2026-07-29 b2b-manager：本地 main 落後 7 週，上游 13 天前已合併的任務被重複實作，review 乾淨通過，最後在 MR 才以合併衝突浮現 |
+| 「diff 很小，看一下就好，不用跑完整流程」 | 小 diff 一樣會改到 enum／DTO 契約；前端零 diff 的契約漂移本來就抓不到，能抓的更不能放 |
+| 「沒有任務文件，spec 審查跳過就好」 | 先照 Step 4b 的順序找；真的沒有才跳過，而且摘要要寫 `Spec: no task document, skipped` |
+| 「code-reviewer 說沒問題，就是沒問題」 | reviewer 也會漏也會錯；它的發現要對照程式原文再分類，0 個發現時至少自己看過高風險檔案 |
+| 「順手改的格式不影響行為，不用提」 | 它讓 diff 變大、遮住真正的修改；照 `common.md`「最小化變更」列出來 |
+| 「這個框架用法看起來沒問題」 | 看起來對的舊版寫法最難發現；沒有出處就要求標未驗證 |
+| 「spec 和規範的發現合在一起排比較清楚」 | 合併會讓一軸蓋掉另一軸；兩邊分開列 |
+
 ## Adding New Tech Stacks
 
 To support a new stack:
@@ -334,6 +402,8 @@ To support a new stack:
 
 This skill integrates with:
 - **code-reviewer subagent** - Deep analysis
+- **Spec subagent** - Diff vs `docs/shared/` task document (Step 4b), reported separately
+- **doubt-check** - In-flight adversarial check for single high-risk decisions during development; stack-review is the after-the-fact gate on the whole diff
 - **Common checklist** - Universal checks
 - **Stack-specific checklists** - Specialized standards
 - **Project docs** (CLAUDE.md, or AGENTS.md for non-Claude agents; architecture docs) - Project rules

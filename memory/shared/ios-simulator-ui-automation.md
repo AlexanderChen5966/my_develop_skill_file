@@ -1,11 +1,12 @@
 ---
 name: ios-simulator-ui-automation
 description: 用 CGEvent 驅動 iOS Simulator 做 UI 手動測試的可行方法與四個已驗證失敗的路徑
-metadata: 
+metadata:
   node_type: memory
   type: project
   originSessionId: 6ea00d00-676b-4cea-a022-64a8edd36dc1
-  modified: 2026-08-12T07:05:42.103Z
+  modified: 2026-08-12 07:05:42.103000+00:00
+permalink: agents-memory/shared/ios-simulator-ui-automation
 ---
 
 在 iOS Simulator 上自動點擊／輸入來驗證 APP 行為時，可行做法與死路（2026-08-12 實測於 iPhone 17 Pro）。
