@@ -1,7 +1,7 @@
 ---
 name: figma-to-requirements
 metadata:
-  version: 1.0.0
+  version: 1.0.2
 description: 把 Figma 設計截圖轉成「精確的 UI 任務需求草稿」，存入 docs/shared/。讀取本專案 DESIGN.md，將截圖元素對應到既有設計 token（顏色/文字/間距/元件），產出 token 對應表 + 狀態矩陣 + 待新增 token 清單，再交棒 requirements 補完功能面。通用設計（讀本專案 DESIGN.md，可跨 Flutter 專案使用）。觸發時機：截圖轉需求、Figma 轉需求、設計稿轉任務、把截圖變成需求文件、UI 需求分析、依設計稿寫需求。
 ---
 
@@ -90,7 +90,7 @@ metadata header **與 requirements 完全一致**：
 
 > ✅ UI 規格草稿已建立於 `docs/shared/<功能>_task.md`。
 > 下一步請補充功能面需求（觸發條件 / API / 業務規則 / 邊界），
-> 接著執行 **requirements** 補完：影響範圍探索、風險評估、工程任務拆解。
+> 接著執行 **requirements**（個人 plugin 版名稱 `dev:requirements`）補完：影響範圍探索、風險評估、工程任務拆解。
 
 **不要**自己做風險評估或寫程式碼——那是 requirements 與實作階段的職責。
 

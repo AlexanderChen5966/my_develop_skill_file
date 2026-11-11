@@ -35,4 +35,5 @@ When the shape of that interface is itself in question (how deep the module is, 
 
 - **Red before green.** Write the failing test first, then only enough code to pass it. Don't anticipate future tests or add speculative features.
 - **One slice at a time.** One seam, one test, one minimal implementation per cycle.
+- **A new test that passes immediately is not a red.** If an earlier slice already covers the behavior, the test can never fail first. Don't fake a red by breaking the code. Either drop the test, or keep it labeled as a spec confirmation (say so in the commit or report), then move on to the next slice that can actually fail.
 - **Refactoring is not part of the loop.** It belongs to the review stage (the `stack-review` skill, or `matt-code-review` where a repo has it), not the red → green implementation cycle.

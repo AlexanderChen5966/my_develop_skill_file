@@ -13,7 +13,8 @@
 set -u
 SRC="$HOME/.agents/skills"
 TARGETS=(
-  "$HOME/.claude/skills"                    # Claude Code
+  # Claude Code 不再連結（2026-11-11 起改用個人 plugin：alexanderchen5966-marketplace，
+  #   本體改完後跑該 marketplace 的 scripts/sync-plugins.sh sync）
   "$HOME/.gemini/config/skills"             # Antigravity CLI（agy）
   # ⚠️ agy 路徑以實測為準：官方網頁寫 ~/.gemini/antigravity-cli/skills，但 agy 1.4.2 實際只讀
   #    ~/.gemini/config/skills（2026-10-19 實測：前者放實體資料夾也讀不到；後者實體與 symlink 皆可）。

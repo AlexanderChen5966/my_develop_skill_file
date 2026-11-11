@@ -8,8 +8,8 @@ description: >-
   觸發關鍵字："產出文件"、"記錄功能"、"建立架構文件"、"整理 API"、
   "bug 紀錄"、"修復紀錄"、"widget 文件"、"元件文件"、"變更歷程"、"更新文件"。
 metadata:
-  version: 2.2.1
-  last-updated: 2026-08-03
+  version: 2.2.2
+  last-updated: 2026-11-11
 ---
 
 # Project Documentation

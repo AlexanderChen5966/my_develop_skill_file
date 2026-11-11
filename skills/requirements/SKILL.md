@@ -1,7 +1,7 @@
 ---
 name: requirements
 metadata:
-  version: 1.7.2
+  version: 1.7.3
 description: 將模糊需求轉換為標準化任務文件，存入 docs/shared/。先讀既有架構／API 參考文件（含上游 repo）並判斷可信度，再翻原始碼補足；自動分析影響範圍（含跨服務 enum／DTO 契約）、拆解實作任務、確認風險清單，產出可直接交給 AI agent 實作的任務文件。觸發時機：/requirements、討論作法、需求分析、寫任務文件、規劃功能、我想要新增/修改功能時。只要使用者描述想做的功能變更，就應主動使用此 skill。
 ---
 
@@ -25,7 +25,7 @@ description: 將模糊需求轉換為標準化任務文件，存入 docs/shared/
 
 #### 需求模糊時：先叫 `grilling` 追問，不要自己猜
 
-符合任一情況，就先呼叫 Skill tool 叫 `grilling`，把模糊處問到沒有分歧再往下走：
+符合任一情況，就先呼叫 Skill tool 叫 `grilling`（Claude Code 透過個人 plugin 安裝時名稱是 `core:grilling`，以可用 skill 清單上的名稱為準），把模糊處問到沒有分歧再往下走：
 
 - 上面 5 項有 2 項以上答不出來，或使用者的回答彼此矛盾
 - 有多種合理做法，選哪一種會改變影響範圍或任務拆法（例：改既有頁面 vs. 開新頁面）

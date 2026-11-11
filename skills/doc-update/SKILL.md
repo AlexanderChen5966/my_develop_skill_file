@@ -1,7 +1,7 @@
 ---
 name: doc-update
 metadata:
-  version: 1.3.0
+  version: 1.3.1
 description: Code review 通過後，自動將 docs/shared/ 任務文件狀態從「待實作」標記為「已完成」，並同步更新 CHANGELOG.md 與 docs/shared/readme.md 索引；最後做沉澱判斷，提議這次學到的東西要不要留、用哪種形式留（測試、專案規則、記憶、文件、公司知識），經使用者同意才寫入。觸發時機：/doc-update、code review 通過後、更新任務文件、mark as done、標記完成、功能實作完畢需要收尾文件時。只要使用者提到 code review 完成、功能上線、任務結束等情境，就應主動使用此 skill。
 ---
 
@@ -170,7 +170,7 @@ grep -l -E "待實作|進行中" docs/shared/*.md
 | 工具 | 管什麼 |
 |---|---|
 | doc-update Step 7 | 這張卡解掉的問題，學到的東西放哪 |
-| `retro` | 這個 session 的工作環境（skill、規則、指令）哪裡可以改善 |
+| `retro` | 這個 session 的工作環境（skill、規則、指令）哪裡可以改善。**只能由使用者手動叫**（`/retro`，plugin 版 `/core:retro`），本 skill 不會也叫不到它；覺得需要時在回覆裡建議使用者叫 |
 | `/knowledge-capture` | 第 5 級的實際寫入流程（審查、開 MR） |
 
 ### Step 8：補流程機制的退場追蹤（試用期間）

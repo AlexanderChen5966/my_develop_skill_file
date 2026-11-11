@@ -9,6 +9,8 @@
 title: [問題簡述]
 type: bug-record
 created: YYYY-MM-DD
+updated: YYYY-MM-DD
+source-commit: <修復 commit 的短碼（git rev-parse --short HEAD）>
 status: completed
 related-modules: [模組名稱]
 ---

@@ -7,7 +7,7 @@
 
 ## 本機修改
 
-- `tdd/SKILL.md`：叫用 `codebase-design` 改成「repo 有才叫」；重構歸屬改指 `stack-review`（有 `matt-code-review` 的 repo 照舊）
+- `tdd/SKILL.md`：叫用 `codebase-design` 改成「repo 有才叫」；重構歸屬改指 `stack-review`（有 `matt-code-review` 的 repo 照舊）；2026-11-11 在 Rules of the loop 加「新測試一寫就綠不算紅燈」的處理方式（plugin 補測發現）
 - `pr/CREDITS.md`：原樣保留（pr 改寫自 Humanlayer 的 show-me）
 
 ## 更新上游時

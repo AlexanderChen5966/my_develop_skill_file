@@ -7,7 +7,7 @@
 
 | 路徑 | 內容 | 進 git？ |
 |---|---|---|
-| `versions/<v>/skills/` | 凍結的版本 skill（v1＝`~/.agents` 2026-11-09 修改前的 HEAD；v2＝當天修改後） | ✅ |
+| `versions/<v>/skills/` | 凍結的版本 skill（v1＝`~/.agents` 2026-11-09 修改前的 HEAD；v2＝當天修改後；v4＝2026-11-11 plugin 切換、補測後的本體，多了 dev-web 的 flutter-ui-compare）。⚠️ bench 把 skill 放在 `repo/.claude/skills/`，測的是 skill 內容，不是 plugin 包裝（名稱沒有 `dev:` 前綴） | ✅ |
 | `prompt.md` | 所有版本共用的指令（固定，不隨版本改） | ✅ |
 | `settings.json` | 受測 agent 的權限白名單（不用 bypass） | ✅ |
 | `claude-home/` | 受測 agent 專用的 `CLAUDE_CONFIG_DIR`：共同規則 `CLAUDE.md`、`agents/code-reviewer.md`、登入狀態、對話紀錄 | ❌ |
