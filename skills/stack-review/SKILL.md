@@ -2,8 +2,8 @@
 name: stack-review
 description: Comprehensive code review for multiple tech stacks with automatic technology detection. Supports Flutter (Riverpod/Bloc), Java Spring Boot, and Android (Java/Kotlin). Use when the user requests code review (e.g., "/review", "review this code", "check my changes"), after completing feature development, or for pre-commit checks. Automatically detects project type and applies appropriate architectural standards, security checks, and best practices.
 metadata:
-  version: 1.6.0
-  last-updated: 2026-11-09
+  version: 1.7.1
+  last-updated: 2026-11-11
 ---
 
 # Code Review
@@ -229,6 +229,9 @@ Task(
     (b) Scope creep: behaviour in the diff the task document did not ask for
     (c) Implemented but looks wrong: matches a requirement in name, but the behaviour differs
     (d) 後端依賴 / 跨服務契約: if the doc declares backend enums/DTOs, does the code handle them as the doc says?
+    (e) doubt-check: for every task marked `**需 doubt-check：** 是…`, is there a doubt-check result
+        (主張, 複查輪數, 結論) in 實作注意事項 or the task's comments? Missing → report it. Present but the
+        code differs from what was reviewed → report it.
 
     Quote the task-document line for every finding, plus file:line in the diff.
     If the task document itself is ambiguous on a point, say so instead of guessing.
@@ -284,6 +287,7 @@ After the code-reviewer subagent (and the spec subagent, if launched) completes:
 - **Scope creep**: [file:line] — [what it does that wasn't asked]
 - **Looks wrong**: [requirement quote] vs [file:line]
 - **Contract**: [backend dependency handled as documented? yes / issue]
+- **Doubt-check**: [tasks marked 需 doubt-check → result recorded? yes / missing / code differs from reviewed version / none marked]
 
 ### Compliance Checklist
 - [x] Architecture pattern correct

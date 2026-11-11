@@ -20,6 +20,7 @@ b2b-manager 的 AI 相關檔案**全部刻意排除在版控之外**，`.gitigno
 
 **範圍：** 這條只管**公司專案的 repo**。2026-10-21 使用者確認：AI 資訊屬個人使用，
 `~/.agents/`（共用 skill、長期記憶）備份到**個人 GitHub**（my_develop_skill_file，公開）是可以的，不必再提出疑慮。
+2026-11-10 使用者再確認：`docs/shared/` 不進版控（本來就被 `/docs/` 涵蓋，規格存放位置的待決事項就此結案）；三個備份 repo（my_develop_skill_file、ai--agent-file-store、my_llm_wiki）維持 PUBLIC，**不要再提「改 private」或詢問**。
 
 **How to apply:**
 - ❌ 不要提議把 `AGENTS.md`／`CLAUDE.md`／`.claude/`／`docs/` 加進 git 或改 `.gitignore`
