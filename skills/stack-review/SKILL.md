@@ -2,8 +2,8 @@
 name: stack-review
 description: Comprehensive code review for multiple tech stacks with automatic technology detection. Supports Flutter (Riverpod/Bloc), Java Spring Boot, Android (Java/Kotlin), iOS (Swift/Objective-C), React Native (Expo), and React web (Next.js/Vite). Use when the user requests code review (e.g., "/review", "review this code", "check my changes"), after completing feature development, or for pre-commit checks. Automatically detects project type and applies appropriate architectural standards, security checks, and best practices.
 metadata:
-  version: 1.9.0
-  last-updated: 2026-11-11
+  version: 1.10.0
+  last-updated: 2026-11-13
 ---
 
 # Code Review
@@ -160,70 +160,9 @@ See stack-specific checklists in `references/` for detailed focus areas.
 
 Use the Task tool to launch the code-reviewer subagent for deep analysis. When the agent is installed through the personal Claude Code plugin, its name is `dev:code-reviewer`; use the name shown in the available agent list.
 
-> **Agents without a subagent/Task tool** (Codex, Copilot CLI, opencode, agy, Cursor): skip the launch and perform the same deep review yourself in the current session, using the prompt below as your checklist. Output format (Step 5) is unchanged.
+> **Agents without a subagent/Task tool** (Codex, Copilot CLI, opencode, agy, Cursor): skip the launch and perform the same deep review yourself in the current session, using the prompt in references/code-reviewer-call.md as your checklist. Output format (Step 5) is unchanged.
 
-**Invocation Template**:
-```
-Task(
-  subagent_type='code-reviewer',
-  description='Review [STACK] changes',
-  prompt='''
-    Review the following code changes for a [TECH_STACK] project:
-
-    **Files to review**:
-    - [file1_path] ([type])
-    - [file2_path] ([type])
-
-    **Focus areas**:
-    1. [Focus area from Step 3]
-    2. [Focus area from Step 3]
-    ...
-
-    **Project context**:
-    - Technology stack: [STACK]
-    - Architecture pattern: [e.g., MVVM, Clean Architecture]
-    - [Stack-specific context]
-
-    **Checklists to reference**:
-    - Common (all stacks): references/common.md
-    - Stack-specific: references/[stack].md
-
-    **Output format**:
-    Categorize findings by severity with file:line references:
-    - 🔴 Critical: Security, architecture violations, breaking changes
-    - 🟡 Warning: Code smells, performance, style issues
-    - 🟢 Suggestion: Optional improvements
-  '''
-)
-```
-
-**Example (Flutter + Riverpod)**:
-```
-Review Flutter + Riverpod Web project:
-
-Files: order_stats_page.dart (SingleTaskState), order_stats_notifier.dart
-
-Focus: State type compliance, Riverpod patterns (ref.watch vs ref.read),
-lifecycle (initState/dispose/onVisibleChange), UI structure
-
-Context: Flutter Web, Riverpod, OAuth2 PKCE, TaskManager singleton
-
-Checklists: references/common.md, references/flutter-riverpod.md
-```
-
-**Example (Spring Boot)**:
-```
-Review Spring Boot project:
-
-Files: UserController.java, UserService.java, UserRepository.java
-
-Focus: REST API design, Bean injection (constructor), JPA N+1 queries,
-transaction management
-
-Context: Spring Boot 3.x, JPA/Hibernate, RESTful architecture
-
-Checklists: references/common.md, references/springboot.md
-```
+**Invocation**: launch a `code-reviewer` subagent whose prompt lists the files, the focus areas from Step 3, the project context (stack, architecture), the checklists to reference (`references/common.md` + `references/[stack].md`) and the severity format 🔴/🟡/🟢 with `file:line`. Fill in the template in [references/code-reviewer-call.md](references/code-reviewer-call.md).
 
 ### Step 4b: Spec Review (parallel, when a task document exists)
 
@@ -240,33 +179,9 @@ document.
 4. Several candidates or none → ask the user. If they say there is no task document, skip this step and say so in the summary ("Spec: no task document, skipped")
 
 **Launch it in the same message as the Step 4 code-reviewer call**, so both run in parallel and
-neither pollutes the other's context:
-
-```
-Task(
-  subagent_type='general-purpose',
-  description='Spec review against task doc',
-  prompt='''
-    Compare a code change against its task document. Do not review code style or quality.
-
-    **Diff**: `git diff origin/<target>...HEAD` (commits: `git log --oneline origin/<target>..HEAD`)
-    **Task document**: docs/shared/<file>.md — read it in full, especially 需求說明, 契約依據, 實作任務 and the checklist in 執行步驟.
-
-    Report:
-    (a) Missing or partial: things the task document asks for that the diff does not do
-    (b) Scope creep: behaviour in the diff the task document did not ask for
-    (c) Implemented but looks wrong: matches a requirement in name, but the behaviour differs
-    (d) 後端依賴 / 跨服務契約: if the doc declares backend enums/DTOs, does the code handle them as the doc says?
-    (e) doubt-check: for every task marked `**需 doubt-check：** 是…`, is there a doubt-check result
-        (主張, 複查輪數, 結論) in 實作注意事項 or the task's comments? Missing → report it. Present but the
-        code differs from what was reviewed → report it.
-
-    Quote the task-document line for every finding, plus file:line in the diff.
-    If the task document itself is ambiguous on a point, say so instead of guessing.
-    Under 400 words.
-  '''
-)
-```
+neither pollutes the other's context. Use `subagent_type='general-purpose'` with the prompt in
+[references/spec-review-prompt.md](references/spec-review-prompt.md). It must report: (a) missing/partial, (b) scope creep,
+(c) implemented but looks wrong, (d) backend dependency / cross-service contract, (e) doubt-check result recorded for every task marked `**需 doubt-check：** 是…` — each finding quoting the task-document line plus `file:line`.
 
 > **Agents without a subagent/Task tool**: do the spec pass yourself *after* finishing the checklist
 > pass, and keep the two sets of notes separate.
@@ -290,84 +205,11 @@ After the code-reviewer subagent (and the spec subagent, if launched) completes:
 
 ### Step 6: Present Review Summary
 
-```markdown
-## Code Review Summary
+Use the layout in [references/summary-format.md](references/summary-format.md). Required parts: Tech Stack, Files Reviewed, Overall Status, 🔴/🟡/🟢 lists with `file:line`, a separate **Spec Check** section (or `Spec: no task document, skipped`), Compliance Checklist, Recommendations.
 
-**Tech Stack**: [Detected Stack]
-**Files Reviewed**: [Count] files
-**Overall Status**: [✅ Approved / ⚠️ Needs Attention / ❌ Requires Changes]
+## Supported Tech Stacks & Usage Examples
 
-### Critical Issues (🔴)
-1. **[file:line]** - [Issue]
-   - **Problem**: [Explanation]
-   - **Fix**: [Recommendation with code]
-   - **Reference**: [Checklist section]
-
-### Warnings (🟡)
-[List with file:line references]
-
-### Suggestions (🟢)
-[List optional improvements]
-
-### Spec Check (vs `docs/shared/<file>.md`)
-<!-- or: "Spec: no task document, skipped" -->
-- **Missing / partial**: [requirement quote] → [file:line or "not found"]
-- **Scope creep**: [file:line] — [what it does that wasn't asked]
-- **Looks wrong**: [requirement quote] vs [file:line]
-- **Contract**: [backend dependency handled as documented? yes / issue]
-- **Doubt-check**: [tasks marked 需 doubt-check → result recorded? yes / missing / code differs from reviewed version / none marked]
-
-### Compliance Checklist
-- [x] Architecture pattern correct
-- [x] State management follows best practices
-- [ ] All resources properly disposed (file.dart:123)
-- [x] Security best practices followed
-
-### Recommendations
-1. [Priority 1 action]
-2. [Priority 2 action]
-
-### References
-- [references/common.md](references/common.md)
-- [references/[stack].md](references/[stack].md)
-```
-
-## Supported Tech Stacks
-
-### Flutter + Riverpod
-**Checklist**: [references/flutter-riverpod.md](references/flutter-riverpod.md)
-
-**Key checks**: State types (ConsumerState/SingleTaskState/CacheableState), Riverpod patterns, lifecycle, TaskManager, OAuth2
-
-### Flutter + Bloc
-**Checklist**: [references/flutter-bloc.md](references/flutter-bloc.md)
-
-**Key checks**: Bloc/Cubit architecture, Event/State design, BlocProvider, transformers, testing
-
-### Java Spring Boot
-**Checklist**: [references/springboot.md](references/springboot.md)
-
-**Key checks**: Bean DI (constructor injection), JPA/Hibernate (N+1 queries), REST API, transactions, Spring Security
-
-### Android (Java/Kotlin)
-**Checklist**: [references/android.md](references/android.md)
-
-**Key checks**: MVVM/MVI, ViewModel/LiveData/StateFlow, memory leaks, Jetpack Compose, Coroutines
-
-### iOS (Swift/Objective-C)
-**Checklist**: [references/ios.md](references/ios.md)
-
-**Key checks**: Retain cycles (`[weak self]`, delegates), Swift Concurrency (`@MainActor`, cancellation, `Sendable`), SwiftUI state ownership, UIKit cell reuse, Keychain, `Info.plist` usage strings, privacy manifest
-
-### React Native (Expo)
-**Checklist**: [references/react-native.md](references/react-native.md)
-
-**Key checks**: Hooks rules and effect cleanup, store selectors, navigation params and guards, FlatList performance, secure storage, permissions on both platforms, OTA updates vs native changes
-
-### React web (Next.js/Vite)
-**Checklist**: [references/react-web.md](references/react-web.md)
-
-**Key checks**: Hooks rules and effect cleanup, query keys and stale `keepPreviousData` results, cache reset on logout or company switch, client vs server components, secrets in `NEXT_PUBLIC_*`, shared component blast radius, side-by-side comparison for migrated pages
+See [references/stack-notes.md](references/stack-notes.md) (optional reading).
 
 ## Common Checks (All Stacks)
 
@@ -377,48 +219,6 @@ After the code-reviewer subagent (and the spec subagent, if launched) completes:
 - **Code Quality**: Naming, function complexity, DRY, error handling, comments
 - **Performance**: DB/API optimization, algorithms, memory, async patterns
 - **Maintainability**: Code organization, SOLID, design patterns, testing
-
-## Usage Examples
-
-**Flutter Riverpod**:
-```
-User: "我剛完成訂單統計頁面，幫我審查一下"
-
-1. git status → order_stats_page.dart, order_stats_notifier.dart
-2. Detect: Flutter + Riverpod (pubspec.yaml)
-3. Identify: SingleTaskState page
-4. Invoke subagent with flutter-riverpod.md checklist
-5. Report:
-   - 🔴 Timer not disposed
-   - 🟡 ref.read() in build method
-   - 🟢 Can use select for optimization
-```
-
-**Spring Boot**:
-```
-User: "/review"
-
-1. git diff → UserController.java, UserService.java, UserRepository.java
-2. Detect: Spring Boot (pom.xml + @SpringBootApplication)
-3. Identify: REST API changes
-4. Invoke subagent with springboot.md checklist
-5. Report:
-   - 🔴 N+1 query in UserRepository.findAllWithOrders()
-   - 🟡 Missing @Transactional in Service
-   - 🟢 Use constructor injection instead of field injection
-```
-
-**Mixed Stack**:
-```
-User: "Review all my changes"
-
-1. git status → Flutter + Spring Boot changes
-2. Detect both stacks
-3. Review separately:
-   - Flutter files with flutter-riverpod.md
-   - Spring Boot files with springboot.md
-4. Generate two review reports
-```
 
 ## Common Excuses（常見藉口）
 

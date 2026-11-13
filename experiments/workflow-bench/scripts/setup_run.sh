@@ -27,6 +27,12 @@ git -C "$R/repo" checkout -q -b "$BRANCH"
 S="$SOURCE_REPO"; D="$R/repo"
 for f in AGENTS.md CLAUDE.md DESIGN.md .claudeignore; do [ -e "$S/$f" ] && cp -p "$S/$f" "$D/$f"; done
 mkdir -p "$D/.claude"; cp -Rp "$S/.claude/rules" "$D/.claude/rules"
+# 選用：CONTEXT_FROM=<舊 run 的 repo 目錄>，AGENTS.md 與 .claude/rules 改用該份凍結版本
+# （來源 repo 之後若把本卡的修法寫進規則，就會洩漏答案；用它讓各版本脈絡一致）
+if [ -n "${CONTEXT_FROM:-}" ]; then
+  cp -p "$CONTEXT_FROM/AGENTS.md" "$D/AGENTS.md"
+  rm -rf "$D/.claude/rules"; cp -Rp "$CONTEXT_FROM/.claude/rules" "$D/.claude/rules"
+fi
 rsync -a --exclude 'shared/' --exclude 'issue/' --exclude 'agent-handoff/' --exclude '.DS_Store' "$S/docs/" "$D/docs/"
 cat > "$D/CHANGELOG.md" <<'EOF'
 # B2B Manager 變更記錄
@@ -40,7 +46,7 @@ cat > "$D/CHANGELOG.md" <<'EOF'
 ## [Unreleased]
 EOF
 if grep -rqE "$TICKET|${TICKET#SSGS-}" "$D/docs" "$D"/*.md "$D/.claude/rules" 2>/dev/null; then
-  echo "❌ 脈絡檔仍提到 $TICKET："; grep -rlE "$TICKET" "$D/docs" "$D"/*.md "$D/.claude/rules"; exit 1; fi
+  echo "❌ 脈絡檔仍提到 ${TICKET}："; grep -rlE "$TICKET" "$D/docs" "$D"/*.md "$D/.claude/rules"; exit 1; fi
 
 # 3. 凍結的版本 skill 放專案層
 cp -Rp "$BENCH/versions/$VER/skills" "$D/.claude/skills"

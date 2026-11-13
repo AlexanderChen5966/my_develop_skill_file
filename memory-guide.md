@@ -23,7 +23,7 @@
 
 - ❌ 不要新增、修改或刪除 `~/.agents/memory/` 底下的任何檔案（只有 Claude Code 寫入）。
 - 你學到值得長期記住的事（決定與原因、踩過的坑、試過但失敗的做法）時，寫進 multiagent-handoff 的交接檔（`.handoff/CURRENT.md`）或任務單的「建議記憶」一節，格式：
-  `- [層：project/shared/global] 內容……（原因：……）`
+  `- [層：project/shared/global] 內容……（原因：……；驗證：哪天、在哪、看到什麼，沒驗證過寫 uncertain）`
 - 沒有在用 multiagent-handoff 時，直接在回覆裡告訴使用者「建議記住：……」。
 
 ### 其他規則
