@@ -6,3 +6,6 @@ __pycache__/
 # Basic Memory 索引（之後加入）
 *.db
 *.sqlite*
+
+# 個人 marketplace（獨立 git repo，推到 my_marketplace_plugin）
+marketplace/
